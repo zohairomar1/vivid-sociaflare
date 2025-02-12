@@ -71,8 +71,17 @@ const VantaBackground = () => {
   return (
     <div 
       ref={vantaRef} 
-      className="fixed inset-0 -z-10"
-      style={{ position: 'fixed', zIndex: -1, width: '100%', height: '100vh' }}
+      style={{ 
+        position: 'fixed',
+        zIndex: -1,
+        width: '100%',
+        height: '100vh',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        pointerEvents: 'none'
+      }}
     />
   );
 };

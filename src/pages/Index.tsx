@@ -24,7 +24,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-transparent">
       <VantaBackground />
       <div className="container mx-auto relative">
         <motion.div
