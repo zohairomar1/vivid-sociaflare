@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, MessageCircle, Share2, TrendingUp, Users, GraduationCap, ChevronRight } from "lucide-react";
@@ -24,25 +23,23 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20">
-      <div className="container px-4 py-8 mx-auto">
-        {/* Hero Section */}
+      <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="h-screen flex flex-col items-center justify-center text-center px-4 -mt-16"
         >
           <span className="px-4 py-1.5 rounded-full bg-primary/5 text-primary text-sm font-medium inline-block mb-4 hover:bg-primary/10 transition-colors cursor-pointer">
             Welcome to Social Hub
           </span>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
+          <h1 className="text-4xl md:text-7xl font-bold mb-6 text-balance bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
             Connect. Share. Inspire.
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
             Join our community of creators, innovators, and storytellers. Share your journey and inspire others.
           </p>
           
-          {/* Toggler for Students/Clubs */}
           <div className="inline-flex rounded-full p-1 bg-secondary mb-8">
             {(['students', 'clubs'] as const).map((section) => (
               <button
@@ -68,11 +65,11 @@ const Index = () => {
               className="max-w-xl mx-auto mb-8"
             >
               {activeSection === 'students' ? (
-                <p className="text-muted-foreground">
+                <p className="text-lg text-muted-foreground">
                   Connect with your peers, join student clubs, and showcase your achievements.
                 </p>
               ) : (
-                <p className="text-muted-foreground">
+                <p className="text-lg text-muted-foreground">
                   Manage your club activities, recruit members, and organize events effortlessly.
                 </p>
               )}
@@ -90,9 +87,16 @@ const Index = () => {
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-primary-foreground/0 via-primary-foreground/5 to-primary-foreground/0 group-hover:translate-x-full transition-transform duration-500" />
           </motion.button>
+
+          <motion.div 
+            className="absolute bottom-8 left-1/2 -translate-x-1/2"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <ChevronRight className="w-6 h-6 rotate-90 text-primary/60" />
+          </motion.div>
         </motion.div>
 
-        {/* Stats Section */}
         <motion.div
           variants={containerAnimation}
           initial="hidden"
@@ -126,7 +130,6 @@ const Index = () => {
           ))}
         </motion.div>
 
-        {/* Featured Stories */}
         <motion.div
           variants={containerAnimation}
           initial="hidden"
@@ -217,7 +220,6 @@ const Index = () => {
           </div>
         </motion.div>
 
-        {/* Call to Action */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
