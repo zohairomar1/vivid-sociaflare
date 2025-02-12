@@ -8,11 +8,11 @@ const VantaBackground = () => {
   const vantaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!vantaEffect) {
-      setVantaEffect(
-        DOTS({
+    if (!vantaEffect && vantaRef.current) {
+      try {
+        const effect = DOTS({
           el: vantaRef.current,
-          THREE: THREE,
+          THREE,
           mouseControls: true,
           touchControls: true,
           gyroControls: false,
@@ -25,32 +25,56 @@ const VantaBackground = () => {
           color: 0x888888,
           color2: 0x888888,
           showLines: false,
-        })
-      );
+          points: 20,
+          maxDistance: 25.00,
+          backgroundAlpha: 1,
+        });
+
+        setVantaEffect(effect);
+      } catch (error) {
+        console.error('Failed to initialize Vanta effect:', error);
+        return;
+      }
     }
 
     const handleScroll = () => {
       if (vantaEffect) {
-        const scrollY = window.scrollY;
-        const newSpacing = Math.max(10, 100 - scrollY / 5);
-        const newScale = 1 + scrollY / 1000;
+        try {
+          const scrollY = window.scrollY;
+          const newSpacing = Math.max(10, 100 - scrollY / 5);
+          const newScale = 1 + scrollY / 1000;
 
-        vantaEffect.setOptions({
-          spacing: newSpacing,
-          scale: newScale,
-        });
+          vantaEffect.setOptions({
+            spacing: newSpacing,
+            scale: newScale,
+          });
+        } catch (error) {
+          console.error('Error updating Vanta effect:', error);
+        }
       }
     };
 
     window.addEventListener('scroll', handleScroll);
 
     return () => {
-      if (vantaEffect) vantaEffect.destroy();
+      if (vantaEffect) {
+        try {
+          vantaEffect.destroy();
+        } catch (error) {
+          console.error('Error destroying Vanta effect:', error);
+        }
+      }
       window.removeEventListener('scroll', handleScroll);
     };
   }, [vantaEffect]);
 
-  return <div ref={vantaRef} className="fixed inset-0 -z-10" />;
+  return (
+    <div 
+      ref={vantaRef} 
+      className="fixed inset-0 -z-10"
+      style={{ position: 'fixed', zIndex: -1, width: '100%', height: '100vh' }}
+    />
+  );
 };
 
 export default VantaBackground;
