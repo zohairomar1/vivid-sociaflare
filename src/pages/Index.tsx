@@ -1,6 +1,8 @@
+
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, MessageCircle, Share2, TrendingUp, Users, GraduationCap, ChevronRight } from "lucide-react";
+import VantaBackground from "../components/VantaBackground";
 
 const Index = () => {
   const [hoveredStory, setHoveredStory] = useState<number | null>(null);
@@ -22,8 +24,9 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20">
-      <div className="container mx-auto">
+    <div className="min-h-screen">
+      <VantaBackground />
+      <div className="container mx-auto relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
